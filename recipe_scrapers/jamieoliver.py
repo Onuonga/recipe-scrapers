@@ -30,4 +30,12 @@ class JamieOliver(AbstractScraper):
 
     def instructions(self):
         instructions = self.soup.find("ol", {"class": "recipeSteps"}).findAll("li")
+        if instructions is None:
+            instructions = self.soup.find("div", {"class": "medthod-p"})
         return "\n".join([normalize_string(inst.get_text()) for inst in instructions])
+
+    def special_diets_tags(self):
+        special_diets_tags = self.soup.find("span", {"class": "full-name"})
+        if not special_diets_tags:
+            return None
+        return [normalize_string(tag.get_text()) for tag in special_diets_tags]

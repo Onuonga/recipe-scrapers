@@ -60,3 +60,11 @@ class TestJamieOliverScraper(ScraperTest):
             ),
             self.harvester_class.instructions(),
         )
+
+    def test_special_diets_tags(self):
+        self.assertCountEqual(
+            [
+                "Vegetarian",
+            ],
+            self.harvester_class.special_diets_tags(),
+        )
